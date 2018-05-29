@@ -31,6 +31,8 @@ class App extends Component {
             </Panel>
           ))}
         </PanelGroup>
+
+        <Button bsStyle="primary">Add Recipe</Button>
       </div>
     );
   }
