@@ -111,13 +111,15 @@ class App extends Component {
 
     return (
       <div className="App container">
+        <h1 className="main-title"> Recipe Box </h1>
+
         {/* show when theres at least 1 recipe */}
         {recipes.length > 0 && (
           <Fragment>
             <PanelGroup accordion>
               {/* display all recipes in parent array */}
               {recipes.map((recipe, index) => (
-                <Panel eventKey={index}>
+                <Panel eventKey={index} className="center-block">
                   <Panel.Heading>
                     {/* display recipe name */}
                     <Panel.Title toggle>{recipe.recipeName}</Panel.Title>
@@ -126,13 +128,14 @@ class App extends Component {
                     {/* map over ingrs array to display ingr list */}
                     <ul>{recipe.ingredients.map(ingredient => <li key={ingredient}>{ingredient}</li>)}</ul>
                     <ButtonToolbar>
-                      {/* delete a recipe */}
-                      <Button bsStyle="danger" onClick={event => this.deleteRecipe(index)}>
-                        Delete Recipe
-                      </Button>
                       {/* edit a recipe */}
                       <Button bsStyle="default" onClick={event => this.open('showEdit', index)}>
                         Edit Recipe
+                      </Button>
+
+                      {/* delete a recipe */}
+                      <Button bsStyle="danger" onClick={event => this.deleteRecipe(index)}>
+                        Delete Recipe
                       </Button>
                     </ButtonToolbar>
                   </Panel.Body>
@@ -143,10 +146,10 @@ class App extends Component {
             {/* Popup window to edit a recipe  */}
             <Modal show={this.state.showEdit} onHide={this.close}>
               <Modal.Header closeButton>
-                <Modal.Title>Edit Recipie</Modal.Title>
+                <Modal.Title>Edit Recipe</Modal.Title>
 
                 <Modal.Body>
-                  {/* Enter Recipie Name */}
+                  {/* Enter Recipe Name */}
                   <FormGroup controlId="formBasicText">
                     <ControlLabel>
                       {' '}
@@ -191,7 +194,7 @@ class App extends Component {
             <Modal.Title>Add Recipie</Modal.Title>
 
             <Modal.Body>
-              {/* Enter Recipie Name */}
+              {/* Enter Recipe Name */}
               <FormGroup controlId="formBasicText">
                 <ControlLabel>
                   {' '}
