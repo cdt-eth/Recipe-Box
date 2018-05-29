@@ -22,7 +22,7 @@
 
 # Overview
 
-A recipie box built with React. I deployed the final project to Heroku. You can see the final project [here](#).
+A recipie box built with React. I deployed the final project to Heroku. You can see the final project [here](https://my-react-recipe-box.herokuapp.com/).
 
 
 # Tools
