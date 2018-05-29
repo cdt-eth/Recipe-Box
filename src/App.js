@@ -11,6 +11,18 @@ class App extends Component {
     ]
   };
 
+  //helper function
+  deleteRecipe(index) {
+    // take copy of state to not mutate original
+    let recipes = this.state.recipes.slice();
+
+    // delete out just the indexed instance
+    recipes.splice(index, 1);
+
+    // display new state
+    this.setState({ recipes });
+  }
+
   render() {
     // destructuring to maximize readability below
     const { recipes } = this.state;
@@ -28,8 +40,11 @@ class App extends Component {
                 {/* map over ingrs array to display ingr list */}
                 <ul>{recipe.ingredients.map(ingredient => <li key={ingredient}>{ingredient}</li>)}</ul>
                 <ButtonToolbar>
-                  {/* delete or edit a recipe */}
-                  <Button bsStyle="danger">Delete Recipe</Button>
+                  {/* delete a recipe */}
+                  <Button bsStyle="danger" onClick={event => this.deleteRecipe(index)}>
+                    Delete Recipe
+                  </Button>
+                  {/* edit a recipe */}
                   <Button bsStyle="default">Edit Recipe</Button>
                 </ButtonToolbar>
               </Panel.Body>
