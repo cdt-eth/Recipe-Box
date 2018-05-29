@@ -8,24 +8,49 @@ class App extends Component {
       { recipeName: 'Cookies', ingredients: ['chocolate chips', 'flour', 'eggs'] },
       { recipeName: 'BBQ Chicken', ingredients: ['chicken', 'bbq sauce', 'crockpot'] },
       { recipeName: 'Healthy Pancakes', ingredients: ['oats', 'egg whites', 'greek yogurt'] }
-    ]
+    ],
+    showAdd: false,
+    newestRecipe: { recipeName: '', ingredients: [] }
   };
 
-  //helper function
+  // _______________Helper Functions_______________
+
+  // Delete a Recipe
   deleteRecipe(index) {
     // take copy of state to not mutate original
     let recipes = this.state.recipes.slice();
-
     // delete out just the indexed instance
     recipes.splice(index, 1);
-
     // display new state
     this.setState({ recipes });
   }
 
+  // Update newestRecipe.recipename
+  updateNewRecipe(recipeName, ingredients) {
+    // take copy of state to not mutate original
+    this.setState({
+      newestRecipe: {
+        recipeName: recipeName,
+        ingredients: ingredients
+      }
+    });
+  }
+
+  // opens a popup
+  open = state => {
+    this.setState({ [state]: true });
+  };
+
+  // closes a popup
+  close = () => {
+    if (this.state.showAdd) {
+      this.setState({ showAdd: false });
+    }
+  };
+
   render() {
     // destructuring to maximize readability below
-    const { recipes } = this.state;
+    const { recipes, newestRecipe } = this.state;
     return (
       <div className="App container">
         <PanelGroup accordion>
@@ -52,8 +77,30 @@ class App extends Component {
           ))}
         </PanelGroup>
 
+        <Modal show={this.state.showAdd} onHide={this.close}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add Recipie</Modal.Title>
+            <Modal.Body>
+              <FormGroup>
+                <ControlLabel>
+                  {' '}
+                  Recipe Name{' '}
+                  <FormControl
+                    type="text"
+                    value={this.state.newestRecipe.recipeName}
+                    placeholder="Enter recipe name"
+                    onChange={event => this.updateNewRecipe(event.target.value, newestRecipe.ingredients)}
+                  />
+                </ControlLabel>
+              </FormGroup>
+            </Modal.Body>
+          </Modal.Header>
+        </Modal>
+
         {/* add a recipe */}
-        <Button bsStyle="primary">Add Recipe</Button>
+        <Button bsStyle="primary" onClick={event => this.open('showAdd')}>
+          Add Recipe
+        </Button>
       </div>
     );
   }
