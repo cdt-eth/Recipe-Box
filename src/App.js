@@ -25,9 +25,8 @@ class App extends Component {
     this.setState({ recipes });
   }
 
-  // Update newestRecipe.recipename
+  // Update newestRecipe
   updateNewRecipe(recipeName, ingredients) {
-    // take copy of state to not mutate original
     this.setState({
       newestRecipe: {
         recipeName: recipeName,
@@ -36,12 +35,29 @@ class App extends Component {
     });
   }
 
-  // opens a popup
+  // Saves a new recipe to recipes
+  saveNewRecipe() {
+    // take copy of state to not mutate original
+    let recipes = this.state.recipes.slice();
+    // add newestRecipe to end of recipe list
+    recipes.push({
+      recipeName: this.state.newestRecipe.recipeName,
+      ingredients: this.state.newestRecipe.ingredients
+    });
+    // display new state
+    this.setState({ recipes });
+    // resets form values
+    this.setState({ newestRecipe: { recipeName: '', ingredients: [] } });
+    // close popup
+    this.close();
+  }
+
+  // Opens a Popup
   open = state => {
     this.setState({ [state]: true });
   };
 
-  // closes a popup
+  // Closes a Popup
   close = () => {
     if (this.state.showAdd) {
       this.setState({ showAdd: false });
@@ -51,49 +67,73 @@ class App extends Component {
   render() {
     // destructuring to maximize readability below
     const { recipes, newestRecipe } = this.state;
+
     return (
       <div className="App container">
-        <PanelGroup accordion>
-          {/* display all recipes in parent array */}
-          {recipes.map((recipe, index) => (
-            <Panel eventKey={index}>
-              <Panel.Heading>
-                {/* display recipe name */}
-                <Panel.Title toggle>{recipe.recipeName}</Panel.Title>
-              </Panel.Heading>
-              <Panel.Body collapsible>
-                {/* map over ingrs array to display ingr list */}
-                <ul>{recipe.ingredients.map(ingredient => <li key={ingredient}>{ingredient}</li>)}</ul>
-                <ButtonToolbar>
-                  {/* delete a recipe */}
-                  <Button bsStyle="danger" onClick={event => this.deleteRecipe(index)}>
-                    Delete Recipe
-                  </Button>
-                  {/* edit a recipe */}
-                  <Button bsStyle="default">Edit Recipe</Button>
-                </ButtonToolbar>
-              </Panel.Body>
-            </Panel>
-          ))}
-        </PanelGroup>
+        {/* show when theres at least 1 recipe */}
+        {recipes.length > 0 && (
+          <PanelGroup accordion>
+            {/* display all recipes in parent array */}
+            {recipes.map((recipe, index) => (
+              <Panel eventKey={index}>
+                <Panel.Heading>
+                  {/* display recipe name */}
+                  <Panel.Title toggle>{recipe.recipeName}</Panel.Title>
+                </Panel.Heading>
+                <Panel.Body collapsible>
+                  {/* map over ingrs array to display ingr list */}
+                  <ul>{recipe.ingredients.map(ingredient => <li key={ingredient}>{ingredient}</li>)}</ul>
+                  <ButtonToolbar>
+                    {/* delete a recipe */}
+                    <Button bsStyle="danger" onClick={event => this.deleteRecipe(index)}>
+                      Delete Recipe
+                    </Button>
+                    {/* edit a recipe */}
+                    <Button bsStyle="default">Edit Recipe</Button>
+                  </ButtonToolbar>
+                </Panel.Body>
+              </Panel>
+            ))}
+          </PanelGroup>
+        )}
 
         <Modal show={this.state.showAdd} onHide={this.close}>
           <Modal.Header closeButton>
             <Modal.Title>Add Recipie</Modal.Title>
             <Modal.Body>
-              <FormGroup>
+              {/* Enter Recipie Name */}
+              <FormGroup controlId="formBasicText">
                 <ControlLabel>
                   {' '}
                   Recipe Name{' '}
                   <FormControl
                     type="text"
-                    value={this.state.newestRecipe.recipeName}
+                    value={newestRecipe.recipeName}
                     placeholder="Enter recipe name"
                     onChange={event => this.updateNewRecipe(event.target.value, newestRecipe.ingredients)}
                   />
                 </ControlLabel>
               </FormGroup>
+
+              {/* Enter Ingredients */}
+              <FormGroup controlId="formControlsTextarea">
+                <ControlLabel>
+                  {' '}
+                  Ingredients{' '}
+                  <FormControl
+                    type="textarea"
+                    value={newestRecipe.ingredients}
+                    placeholder="Enter Ingredients (Separate By Commas)"
+                    onChange={event => this.updateNewRecipe(newestRecipe.recipeName, event.target.value.split(','))}
+                  />
+                </ControlLabel>
+              </FormGroup>
             </Modal.Body>
+            <Modal.Footer>
+              <Button bsStyle="primary" onClick={event => this.saveNewRecipe()}>
+                Save
+              </Button>
+            </Modal.Footer>
           </Modal.Header>
         </Modal>
 
