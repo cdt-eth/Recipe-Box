@@ -23,6 +23,10 @@ class App extends Component {
               </Panel.Heading>
               <Panel.Body collapsible>
                 <ul>{recipe.ingredients.map(ingredient => <li key={ingredient}>{ingredient}</li>)}</ul>
+                <ButtonToolbar>
+                  <Button bsStyle="danger">Delete Recipe</Button>
+                  <Button bsStyle="default">Edit Recipe</Button>
+                </ButtonToolbar>
               </Panel.Body>
             </Panel>
           ))}
