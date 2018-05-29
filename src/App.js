@@ -3,12 +3,9 @@ import { Panel, PanelGroup, Button, ButtonToolbar, Modal, FormGroup, ControlLabe
 import './App.css';
 
 class App extends Component {
+  // _______________State_______________
   state = {
-    recipes: [
-      { recipeName: 'Cookies', ingredients: ['chocolate chips', 'flour', 'eggs'] },
-      { recipeName: 'BBQ Chicken', ingredients: ['chicken', 'bbq sauce', 'crockpot'] },
-      { recipeName: 'Healthy Pancakes', ingredients: ['oats', 'egg whites', 'greek yogurt'] }
-    ],
+    recipes: [],
     showAdd: false,
     showEdit: false,
     currentIndex: 0,
@@ -23,6 +20,8 @@ class App extends Component {
     let recipes = this.state.recipes.slice();
     // delete out just the indexed instance
     recipes.splice(index, 1);
+    // async call that sets the state of recipes to what's in local storage
+    localStorage.setItem('recipes', JSON.stringify(recipes));
     // display new state
     this.setState({ recipes });
   }
@@ -46,6 +45,8 @@ class App extends Component {
       recipeName: this.state.newestRecipe.recipeName,
       ingredients: this.state.newestRecipe.ingredients
     });
+    // async call that sets the state of recipes to what's in local storage
+    localStorage.setItem('recipes', JSON.stringify(recipes));
     // display new state
     this.setState({ recipes });
     // resets form values
@@ -60,6 +61,8 @@ class App extends Component {
     let recipes = this.state.recipes.slice();
     // target exact recipe data
     recipes[currentIndex] = { recipeName: recipeName, ingredients: recipes[currentIndex].ingredients };
+    // async call that sets the state of recipes to what's in local storage
+    localStorage.setItem('recipes', JSON.stringify(recipes));
     // display new state
     this.setState({ recipes });
   }
@@ -70,6 +73,8 @@ class App extends Component {
     let recipes = this.state.recipes.slice();
     // target exact ingredient data
     recipes[currentIndex] = { recipeName: recipes[currentIndex].recipeName, ingredients: ingredients };
+    // async call that sets the state of recipes to what's in local storage
+    localStorage.setItem('recipes', JSON.stringify(recipes));
     // display new state
     this.setState({ recipes });
   }
@@ -84,10 +89,19 @@ class App extends Component {
   close = () => {
     if (this.state.showAdd) {
       this.setState({ showAdd: false });
-    } else if (this.state.showEdit) {
+    }
+    if (this.state.showEdit) {
       this.setState({ showEdit: false });
     }
   };
+
+  // _______________Local Storage_______________
+  componentDidMount() {
+    // get what's in local storage and if nothing is there its an empty array
+    let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
+    // display new state
+    this.setState({ recipes });
+  }
 
   // _______________UI_______________
 
