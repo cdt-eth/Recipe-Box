@@ -189,7 +189,7 @@ class App extends Component {
                       <FormControl
                         type="textarea"
                         value={recipes[currentIndex].ingredients}
-                        placeholder="Enter Ingredients (Separate By Commas)"
+                        placeholder="Enter Ingredients (separate by commas)"
                         onChange={event => this.updateIngredients(event.target.value.split(','), currentIndex)}
                       />
                     </ControlLabel>
@@ -220,7 +220,7 @@ class App extends Component {
                   <FormControl
                     type="text"
                     value={newestRecipe.recipeName}
-                    placeholder="Enter recipe name"
+                    placeholder="Enter Recipe Name"
                     onChange={event => this.updateNewRecipe(event.target.value, newestRecipe.ingredients)}
                   />
                 </ControlLabel>
@@ -234,7 +234,7 @@ class App extends Component {
                   <FormControl
                     type="textarea"
                     value={newestRecipe.ingredients}
-                    placeholder="Enter Ingredients (Separate By Commas)"
+                    placeholder="Enter Ingredients (separate by commas)"
                     onChange={event => this.updateNewRecipe(newestRecipe.recipeName, event.target.value.split(','))}
                   />
                 </ControlLabel>
