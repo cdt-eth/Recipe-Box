@@ -132,10 +132,10 @@ class App extends Component {
         {/* show when theres at least 1 recipe */}
         {recipes.length > 0 && (
           <Fragment>
-            <PanelGroup accordion>
+            <PanelGroup accordion id="a">
               {/* display all recipes in parent array */}
               {recipes.map((recipe, index) => (
-                <Panel eventKey={index} className="center-block">
+                <Panel eventKey={index} key={index} className="center-block">
                   <Panel.Heading>
                     {/* display recipe name */}
                     <Panel.Title toggle>{recipe.recipeName}</Panel.Title>
