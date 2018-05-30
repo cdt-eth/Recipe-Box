@@ -121,6 +121,14 @@ class App extends Component {
           </Button>
         </div>
 
+        {/* show when theres 0 recipes */}
+        {recipes.length == 0 && (
+          <Fragment>
+            {/* <h2> Add a recipe </h2> */}
+            <h3> Add a recipe by clicking the button above! </h3>
+          </Fragment>
+        )}
+
         {/* show when theres at least 1 recipe */}
         {recipes.length > 0 && (
           <Fragment>

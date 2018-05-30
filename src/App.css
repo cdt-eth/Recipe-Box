@@ -105,9 +105,8 @@ li {
   font-size: 33px;
   padding: 0px;
   line-height: normal;
-  margin-left: 60px;
+  margin-left: 75px;
   margin-top: 10px;
-
   /* width: 117px;
   height: 44px;
   font-size: 15px;
@@ -155,4 +154,22 @@ li {
 
 .panel-title > a {
   text-decoration: none;
+}
+
+h2 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 50px;
+}
+
+h3 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  margin-top: 30px;
+  font-style: italic;
+  border-top: 1.25px solid black;
+  padding-top: 20px;
+  width: 600px;
+  margin: auto;
 }
