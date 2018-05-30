@@ -165,11 +165,11 @@ h2 {
 h3 {
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
-  font-size: 20px;
+  font-size: 17px;
   margin-top: 30px;
   font-style: italic;
-  border-top: 1.25px solid black;
-  padding-top: 20px;
+  /* border-top: 1.25px solid black; */
+  padding-top: 15px;
   width: 600px;
   margin: auto;
 }

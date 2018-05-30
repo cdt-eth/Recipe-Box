@@ -41,10 +41,12 @@ class App extends Component {
     // take copy of state to not mutate original
     let recipes = this.state.recipes.slice();
     // add newestRecipe to end of recipe list
-    recipes.push({
-      recipeName: this.state.newestRecipe.recipeName,
-      ingredients: this.state.newestRecipe.ingredients
-    });
+    if (this.state.newestRecipe.recipeName) {
+      recipes.push({
+        recipeName: this.state.newestRecipe.recipeName,
+        ingredients: this.state.newestRecipe.ingredients
+      });
+    }
     // async call that sets the state of recipes to what's in local storage
     localStorage.setItem('recipes', JSON.stringify(recipes));
     // display new state
@@ -196,7 +198,7 @@ class App extends Component {
 
                 <Modal.Footer>
                   <Button bsStyle="primary" onClick={event => this.saveNewRecipe()}>
-                    Save New Edit
+                    Save Edit
                   </Button>
                 </Modal.Footer>
               </Modal.Header>
