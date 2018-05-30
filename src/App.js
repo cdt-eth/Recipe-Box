@@ -111,7 +111,15 @@ class App extends Component {
 
     return (
       <div className="App container">
-        <h1 className="main-title"> Recipe Box </h1>
+        <div className="top-title">
+          <h1 className="main-title"> My Recipe Box </h1>
+          {/* <img src={require('./images/recipe-book.png')} className="bookIcon" /> */}
+
+          {/* add a recipe */}
+          <Button bsStyle="primary" className="addBtn" onClick={event => this.open('showAdd', currentIndex)}>
+            +
+          </Button>
+        </div>
 
         {/* show when theres at least 1 recipe */}
         {recipes.length > 0 && (
@@ -130,12 +138,12 @@ class App extends Component {
                     <ButtonToolbar>
                       {/* edit a recipe */}
                       <Button bsStyle="default" onClick={event => this.open('showEdit', index)}>
-                        Edit Recipe
+                        edit
                       </Button>
 
                       {/* delete a recipe */}
                       <Button bsStyle="danger" onClick={event => this.deleteRecipe(index)}>
-                        Delete Recipe
+                        delete
                       </Button>
                     </ButtonToolbar>
                   </Panel.Body>
@@ -225,16 +233,11 @@ class App extends Component {
 
             <Modal.Footer>
               <Button bsStyle="primary" onClick={event => this.saveNewRecipe()}>
-                Save New Recipe
+                Save
               </Button>
             </Modal.Footer>
           </Modal.Header>
         </Modal>
-
-        {/* add a recipe */}
-        <Button bsStyle="primary" onClick={event => this.open('showAdd', currentIndex)}>
-          Add Recipe
-        </Button>
       </div>
     );
   }
