@@ -4,6 +4,7 @@ import './App.css';
 
 class App extends Component {
   // _______________State_______________
+
   state = {
     recipes: [],
     showAdd: false,
@@ -98,6 +99,7 @@ class App extends Component {
   };
 
   // _______________Local Storage_______________
+
   componentDidMount() {
     // get what's in local storage and if nothing is there its an empty array
     let recipes = JSON.parse(localStorage.getItem('recipes')) || [];
@@ -209,7 +211,7 @@ class App extends Component {
         {/* Popup window to add new recipe */}
         <Modal show={this.state.showAdd} onHide={this.close}>
           <Modal.Header closeButton>
-            <Modal.Title>Add Recipie</Modal.Title>
+            <Modal.Title>Add Recipe</Modal.Title>
 
             <Modal.Body>
               {/* Enter Recipe Name */}
