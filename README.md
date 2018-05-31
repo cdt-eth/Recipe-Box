@@ -5,7 +5,7 @@
 <img height="80" width="80" alt="palette" src="https://user-images.githubusercontent.com/26611339/40664655-6ae1d49a-6329-11e8-903e-f1cb25e9fbed.png" />
 </a>
 
-<p> A recipie box built with React. </p>
+<p> A recipe box built with React. </p>
 </div>
 
 <hr />
